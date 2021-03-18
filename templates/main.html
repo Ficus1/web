@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .frog p{
+     text-align: center;
+     padding-right: 400px;
+     color: #800080';
+    }
+    .frog{
+     padding-left: 400px;
+     padding-right: 400px;
+     max-width: 400px;
+    }
+    .sort a{
+    padding-left: 400px;
+    }
+</style>
+<div class="sort">
+    {% for i in sort %}
+    <a href="/{{i}}">{{i}}</a>
+    {% endfor %}
+</div>
+{% if not adverts %}
+<p align="center"> Таких объявлений не обнаружено</p>
+{% endif %}
+<div class = "frog">
+    <table class="table table-bordered">
+    {% for advert in adverts %}
+        {% if loop.index0 % 3 == 0 %}
+        <tr></tr>
+        {% endif %}
+            <td bgcolor="bg-info">
+                <img width="300" src = "static/img/{{advert[2]}}">
+                <p class=text-info">{{advert[0]}}
+                    {{advert[1]}}руб
+                    {{advert[3]}}</p>
+            <a href="/open/{{advert[4]}}" class="btn btn-success" >
+                Открыть
+            </a>
+            <a href="/like/{{advert[4]}}" class="btn btn-danger">
+                Понравилось
+            </a>
+                {% if current_user.is_authenticated and (current_user.id == 1 or current_user.id == advert[5])%}
+                    <a href="/edit/{{advert[4]}}" class="btn btn-warning">
+                        Изменить
+                    </a>
+                    <a href="/delete/{{advert[4]}}" class="btn btn-danger">
+                        Удалить
+                    </a>
+                {% endif %}
+            </td>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .frog p{
+     text-align: center;
+     padding-right: 400px;
+    }
+    .frog{
+     padding-left: 400px;
+     padding-right: 400px;
+     max-width: 400px;
+    }
+</style>
+<div class = "frog">
+    <table>
+    {% for advert in adverts %}
+        {% if loop.index % 3 == 0 %}
+        <tr></tr>
+        {% endif %}
+            <td>
+                <img width="300" src = "static/img/{{advert[2]}}">
+                <p class=font-weight-light">{{advert[0]}}
+                    {{advert[1]}}руб
+                    {{advert[3]}}</p>
+            <a href="/open/{{advert[4]}}" class="btn btn-warning" >
+                Открыть
+            </a>
+            <a href="/delete_like/{{advert[4]}}" class="btn btn-danger">
+                Убрать
+            </a>
+            </td>
+    {% endfor %}
+    </table>
+</div>
+{% if not adverts %}
+    <div class="alert alert-danger" role="alert">
+        У вас нет понравившихся объявлений
+    </div>
+{% endif %}
+{% endblock %}

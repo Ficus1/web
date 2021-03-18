@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .frog p{
+     text-align: center;
+     padding-right: 400px;
+     color: #800080';
+    }
+    .frog{
+     padding-left: 400px;
+     padding-right: 400px;
+     max-width: 400px;
+    }
+</style>
+<div class="alert alert-success" role="alert">
+  Ваши данные
+</div>
+<p><img width="200" src="static/img/{{user.photo}}"></p>
+<table class="table table-reflow">
+  <tr class="table-info">
+    <td>Имя</td>
+    <td>{{user.name}}</td>
+  </tr>
+  <tr class="table-info">
+    <td>Фамилия</td>
+    <td>{{user.surname}}</td>
+  </tr>
+  <tr class="table-info">
+    <td>Возраст</td>
+    <td>{{user.age}}</td>
+  </tr>
+  <tr class="table-info">
+    <td>Номер телефона</td>
+    <td class="table-danger">{{user.phone_number}}</td>
+  </tr>
+  <tr class="table-info">
+    <td>email</td>
+    <td class="table-danger">{{user.email}}</td>
+  </tr>
+</table>
+{% if current_user.id == user.id %}
+<a href="/edit_user/{{user.id}}" class="btn btn-warning">
+  Изменить данные
+</a>
+{% endif %}
+{% if not adverts %}
+<div class="alert alert-danger" role="alert">
+    <p align="center"> У вас нет объявлений</p>
+</div>
+{% endif %}
+<div class="alert alert-success" role="alert">
+  Ваши объявление
+</div>
+<div class = "frog">
+    <table class="table table-bordered">
+    {% for advert in adverts %}
+        {% if loop.index0 % 3 == 0 %}
+        <tr></tr>
+        {% endif %}
+            <td bgcolor="bg-info">
+                <img width="300" src = "static/img/{{advert[2]}}">
+                <p class=text-info">{{advert[0]}}
+                    {{advert[1]}}руб
+                    {{advert[3]}}</p>
+            <a href="/open/{{advert[4]}}" class="btn btn-success" >
+                Открыть
+            </a>
+            </td>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

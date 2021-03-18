@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+      h1.a { text-align:right; }
+    </style>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}" />
+	<link rel="stylesheet" 
+		  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+		  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+		  crossorigin="anonymous">
+			<title>{{ title }}</title>
+			<h1 class="a">{% if current_user.is_authenticated %}
+				<a class="btn btn-danger" href="/">Главный экран</a>
+				<a class="btn btn-info" href="/personal_cabinet/{{current_user.id}}">{{ current_user.name }} {{ current_user.surname }} личный кабинет</a>
+				<a class="btn btn-info" href="/likest">Понравившиеся объявления</a>
+				<a class="btn btn-info" href="/add_advert">Разместить объявление</a>
+				<a class="btn btn-danger" href="/logout">Выйти</a>
+			{% else %}
+				<p>
+					<a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+					<a class="btn btn-success" href="/login">Войти</a>
+				</p>
+			{% endif %}</h1>
+    </head>
+    <body bgcolor="#000" background="static/img/1.png">
+	{% block content %}{% endblock %}
+    </body>
+</html>

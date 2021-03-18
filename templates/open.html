@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p align="center" class="fs-1">
+    {% if map %}
+    Адрес объявления
+        <a href="https://yandex.ru/maps/{{map[map.find('/?ll'):]}}">
+        <img width="400" src="{{map}}"></a>
+    {% endif %}
+    <img width="300" align="middle" hspace="50" src = "static/img/{{ad.photo}}">{{ad.name}} - {{ad.price}}руб
+    <br> Описание <br> {% for i in ad.about.split('\n') %} {{i}} <br> {% endfor %}
+    <br> Характеристики <br> {% for i in ad.description.split('\n') %} {{i}} <br> {% endfor %}
+    <a href="/personal_cabinet/{{ad.member}}" class="btn btn-success">
+            Свзяаться
+    </a>
+    {% if current_user.is_authenticated and (current_user.id == 1 or current_user.id == ad.member)%}
+        <a href="/edit_1/{{ad.id}}" class="btn btn-warning">
+            Изменить
+        </a>
+        <a href="/delete/{{ad.id}}" class="btn btn-danger">
+            Удалить
+        </a>
+    {% endif %}
+</p>
+{% endblock %}
