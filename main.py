@@ -81,7 +81,6 @@ def open_ad(ad_id):
     map_api_server = "http://static-maps.yandex.ru/1.x/"
     try:
         response = requests.get(map_api_server, params=map_params)
-        print(response.url[response.url.find('/?ll'):])
     except Exception:
         return render_template('open.html', title='Окно тоавара', ad=ad, map='')
     return render_template('open.html', title='Окно тоавара', ad=ad, map=response.url)
