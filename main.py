@@ -1,10 +1,10 @@
 import os
 
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, request
 from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 import requests
-from data import db_session, advert_api
+from data import db_session
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.users import User
 from data.towns import Towns
@@ -17,7 +17,6 @@ from forms.addadverts import AddAdverts
 from data.likest import Like
 from geoc import get_ll_span
 
-from web_pr.data.db_session import check_password
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -380,8 +379,6 @@ def main():
 
 
 if __name__ == '__main__':
-    app.register_blueprint(advert_api.blueprint)
     main()
-
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
