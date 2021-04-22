@@ -382,6 +382,6 @@ def main():
 if __name__ == '__main__':
     app.register_blueprint(advert_api.blueprint)
     main()
-    
+
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
