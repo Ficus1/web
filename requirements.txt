@@ -2,3 +2,4 @@ flask
 requests
 flask_login
 sqlalchemy
+flask_wtf
